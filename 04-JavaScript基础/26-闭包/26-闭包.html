@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 闭包（closure）：指有权访问另一个函数作用域中的变量的函数
+
+    // 代码举例：
+    // function fn1() {
+    //   let a = 10;
+
+    //   function fn2() {
+    //     console.log(a);
+    //   }
+
+    //   fn2();
+    // }
+
+    // fn1();
+
+
+    // 闭包的作用：延伸变量的作用范围
+      function fn1() {
+        let a = 20;
+
+        function fn2() {
+          console.log(a);
+        }
+
+        return fn2;
+      }
+
+      const foo = fn1();
+      foo();
+  </script>
+</body>
+</html>
