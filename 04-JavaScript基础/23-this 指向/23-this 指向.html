@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    function fun() {
+      console.log(this);
+      console.log(this.name);
+    }
+
+    var obj1 = {
+      name: 'leibaio',
+      sayName: fun,
+    };
+
+    var obj2 = {
+      name: 'evan',
+      sayName: fun,
+    };
+
+    var name = '全局的name属性';
+
+    // 以函数形式调用，this是window
+    fun(); // this指向是window对象，this.name指的是全局的name
+
+    obj2.sayName(); // 以方法的形式调用，this是调用方法的对象。this指向的是 obj2，所以this.name指的是obj2.name
+    
+  </script>
+</body>
+</html>

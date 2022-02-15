@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // string 字符串
+    // var a = 'abcde';
+    // var b = 'leibaio';
+    // var c = '哈哈哈';
+    // var e = ''; //空字符串
+
+    // console.log(typeof a);
+    // console.log(typeof b);
+    // console.log(typeof c);
+
+    // 同类引号不能嵌套
+
+    // 转义字符
+    // \" 表示 " 双引号
+    // \' 表示 ' 单引号
+    // \\ 表示 \
+    // \r 表示 回车
+    // \n 表示 换行。n 的意思是 newline
+    // \t 表示 缩进。t 的意思是 tab
+    // \b 表示 空格。b 的意思是 blank
+
+    // var str1 = '我说：”今天\t天气真不错“';
+    // var str2 = '\\\\\\';
+
+    // console.log(str1);
+    // console.log(str2);
+
+    // 获取字符串的长度
+    // var str1 = '苟利国家生死以';
+    // var str2 = '苟利国家生死以,';
+
+    // console.log(str1.length);
+    // console.log(str2.length);
+
+    // 中文算两个字符，英文算一个字符，标点（中英文）算一个字符，空格算一个
+
+    // 字符串拼接，多个字符串用加号+拼接
+    // 拼接规则：拼接前，会把字符串相加的数据类型转为字符串，然后拼接成新的字符串
+
+    // var str1 = '哈哈哈哈' + '嘿嘿嘿嘿';
+    // var str2 = '哈哈哈哈' + 666;
+
+    // var obj = { name: '哈哈哈哈', age: 23 };
+    // var str3 = '哈哈哈哈' + obj;
+
+    // console.log(str1);
+    // console.log(str2);
+    // console.log(str3);
+
+    // 字符串的不可变性
+    // var str = 'hello';
+    // str = 'hahahaha';
+    // 字符串中的值不改变，只是地址改变。重新给str赋值时，常量hello不被修改，依然保存在内存中，str会指向hahahaha
+
+    // 模板字符串
+    
+    // 传统字符串拼接
+    // var name = 'asdfg';
+    // var age = '23';
+    // console.log('name: ' + name + ', age: ' + age);
+
+    // es6写法
+    // var name = 'asdfg';
+    // var age = '23'; 
+    
+    // console.log(`我是${name}, age:${age}`);
+
+    // 在模板字符串中插入表达式
+    // const a = 5;
+    // const b = 10;
+    // console.log('this is ' + (a + b) + 'and\nnot ' + (2 * a + b) + '.');
+
+    // console.log(`this is ${a + b} and
+    // not ${2 * a + b}.`);
+
+
+    // 模板字符串中可以换行
+    // const result = {
+    //   name: 'hahahaha',
+    //   age: 23,
+    //   sex: 'male'
+    // };
+
+    // const html = `    <div>
+    //   <span>${result.name}</span>  
+    //   <span>${result.age}</span>  
+    //   <span>${result.sex}</span>  
+    // </div>
+    // `
+    // console.log(html);
+
+    // 模板字符串中可以调用函数
+    // function getName() {
+    //   return 'leibaio';
+    // }
+
+    // console.log(`www.${getName()}.space`);
+
+    // 模板字符串支持嵌套使用
+    // const nameList = ['111', '222', '333'];
+
+    // function myTemplate() {
+    //   // join('') 的意思是，把数组里的内容合并为一个字符串
+    //   return `<ul>
+    //     ${nameList.map((item) => `<li>${item}</li>`).join('')}
+    //     </ul>
+    //   `
+    // }
+
+    // document.body.innerHTML = myTemplate();
+
+    // 布尔值：boolean
+  </script>
+</body>
+</html>

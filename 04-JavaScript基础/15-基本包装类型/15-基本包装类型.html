@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 查找字符串
+    // 1. indexOf() / lastIndexOf() : 获取字符串中指定内容的索引
+
+    // eg1. 查找单个字符
+    // const str = 'abcdea';
+
+    // console.log(str.indexOf('c'));
+    // console.log(str.lastIndexOf('c'));
+
+    // console.log(str.indexOf('a'));
+    // console.log(str.lastIndexOf('a'));
+    
+    // 2. search()：获取字符串中指定内容的索引（参数一般是正则）
+    // const name = 'leibaio';
+    
+    // console.log(name.search('io'));
+    // console.log(name.search(/io/i));
+    // /io/i 采用的是正则表达式的写法，让 name 去匹配字符 io ，忽略大小写
+
+    // 3. includes(): 字符串中是否包含指定的内容: 包含内容，返回true，否则返回false；后面数字指定检索的起始位置
+    // const name = 'leibaio';
+
+    // console.log(name.includes('io'));
+    // console.log(name.includes('io', 2));
+    // console.log(name.includes('hahaha'));
+
+    // 4. startsWith()：字符串是否以指定的内容开头；后面数字指定检索范围
+    const name = 'leibaio';
+    console.log(name.startsWith('a'));
+    console.log(name.startsWith('a',4));
+    console.log(name.startsWith('c'));
+    console.log(name.startsWith('c',3));
+
+    // 5. endsWith(): 字符串是否以指定的内容结尾，后面数字指定检索的结束位置
+
+
+
+  </script>
+</body>
+</html>

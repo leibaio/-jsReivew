@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 直接通过return让function代码不走下去
+    let retCode = 1003;
+    handleRetCode(retCode);
+
+    function handleRetCode(retCode) {
+      if (retCode == 0) {
+        alert('接口联调成功');
+        return;
+      }
+
+      if (retCode == 101) {
+        alert('活动不存在');
+        return;
+      }
+      
+      // 其他异常返回码
+      alert('系统');
+      return;
+    }
+  </script>
+
+</body>
+</html>
