@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 对象的基本操作
+    // 创建对象：使用new关键字调用的函数。构造函数是专门用来创建对象的函数
+    // var obj = new Object();
+    // 使用typeof检查一个对象时，会返回object
+
+    // 向对象中添加属性
+    // 在对象中保存的值称为属性： 对象.属性名 = 属性值;
+
+    // var obj = new Object();
+
+    // obj.name = '孙悟空';
+    // obj.gender = '男';
+    // obj.age = 23;
+
+    // console.log(JSON.stringify(obj)); // 将obj以JSON字符串形式打印
+
+    // 方式1: 对象.属性名
+    // console.log(obj.gender);
+    // console.log(obj.age);
+
+    // 方式2: 对象['属性名'] = 属性值;
+    // console.log(obj['gender']);
+    // console.log(obj['age']);
+
+    // 修改对象的属性值
+    // obj.name = 'tom';
+
+    // 删除对象的属性
+    // delete obj.name;
+
+    // in 运算符 : 通过改运算符可以检查一个对象中是否含有指定的属性，有则返回true，没有返回false
+    // 语法：'属性名' in 对象;
+
+    // console.log('name' in obj);
+
+    // for of: 遍历数组
+    // ES6中，遍历数组，可以这样做：
+    // let arr1 = [2, 6, 8, 5];
+
+    // for (let value of arr1) {
+    //   console.log(value);
+    // }
+
+    // for of 循环可以避免我们开拓内存空间，增加代码运行效率；使用for of获取的是数组里的值；如果采用for in，获取的是index索引值；
+
+    // Map对象的遍历：for of既可以遍历数组，也可以遍历对象
+
+    // for in：遍历对象的属性。主要用于遍历对象，不建议遍历数组
+    // 语法：for (const 变量 in 对象) { }
+
+    // for (var key in obj) {
+    //   console.log(key);
+    //   console.log(obj[key]);
+    // }
+
+    // const obj  = {
+    //   name: 'leibaio',
+    //   age: 23,
+    //   gender: 'male',
+    //   address: 'shanghai',
+    //   sayHi: function() {
+    //     console.log(this.name);
+    //   },
+    // };
+
+    // // 遍历对象中的属性
+    // for (const key in obj) {
+    //   console.log('属性名：' + key);
+    //   console.log('属性值：' + obj[key]);
+    // }
+
+    // for in 遍历数组（不建议）
+    
+  </script>
+</body>
+</html>
