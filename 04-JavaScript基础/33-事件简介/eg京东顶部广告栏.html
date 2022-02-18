@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+    
+    .w {
+      width: 605px;
+      margin: 10px auto;
+    }
+
+    img {
+      display: block;
+      width: 605px;
+      position: relative;
+    }
+
+    a {
+      position: absolute;
+      top: 15px;
+      right: 5px;
+      color: #fff;
+      text-decoration: none;
+      width: 20px;
+      height: 20px;
+      text-align: center;
+    }
+
+    .hide {
+      display: none!important;
+    }
+  </style>
+  
+</head>
+<body>
+  <div class="top-banner" id="topBanner">
+    <div class="w">
+      <img src="./img/mountainSunset.jpg" alt="/">
+      <a href="#" id="closeBanner">x</a>
+    </div>
+  </div>
+
+  <script>
+    // 需求：点击按钮，隐藏盒子 
+
+    // 1.获取事件源和相关元素
+    var closeBanner = document.getElementById("closeBanner");
+    var topBanner = document.getElementById("topBanner");
+    // 2.绑定事件
+    closeBanner.onclick = function() {
+      topBanner.className = "hide"; // 方式一
+      // topBanner.style.display = "none"; 方式二，效果相同
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=sc, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    /* #box1 {
+      width: 100px;
+      height: 100px;
+      background-color: aqua;
+      cursor: pointer;
+    } */
+
+  </style>
+</head>
+<body>
+  <!-- <div id="box1"></div> -->
+
+  
+
+  <script>
+    // 事件三要素：事件源、事件、事件驱动事件
+    // 事件源：引发后续事件的html标签； 事件：js定义好了； 事件驱动事件：对样式和html的操作，也就是DOM
+
+    // 代码书写步骤：（1）获取事件源； （2）绑定事件； （3）：书写事件驱动程序
+
+    // 代码举例：（点击box1，然后弹窗 ）
+
+    // window.onload = function() {
+    //   console.log("hello");
+    // }
+    
+    // var div = document.getElementById("box1");
+
+    // div.onmouseover = function () {
+    //   // alert("弹出内容");
+    //   div.style.width = "200px";
+    //   div.style.height = "200px";
+    //   div.style.backgroundColor = "blue"; // 属性名是backgroundColor ，不是background-color
+    // }
+
+    // div.onmouseout = function () {
+    //   div.style.width = "100px";
+    //   div.style.height = "100px";
+    //   div.style.backgroundColor = "aqua";
+    // }
+
+    // 1. 获取事件源的方式（DOM节点的获取） 常见方式：
+    // var div1 = document.getElementById("box1");
+    // var arr1 = document.getElementsByTagName("div");
+    // var arr2 = document.getElementsByClassName("hehe");
+
+    // 2. 绑定事件的方式：
+    // 方式一：直接绑定匿名函数: 如上所示
+    // 方式二：先单独定义函数，再绑定
+    // var div1 = document.getElementById("box1");
+    // div1.onclick = fn; // 此处是fn，不是fn()。fn()指的是返回值
+    // function fn() {
+    //   alert("弹出内容");
+    // }
+
+    // onload事件比较特殊，当页面（文本和图片）加载完毕后，出发onload事件 
+
+
+  </script>
+</body>
+</html>
