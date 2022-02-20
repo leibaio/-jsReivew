@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!-- <input type="button" value="aa" />
+  <input type="button" value="bb" />
+  <input type="button" value="cc" />
+  <input type="button" value="dd" />
+  <input type="button" value="ee" />
+  <input type="button" value="ff" /> -->
+  <script>
+    // ES5中，var是定义变量。即时在区域块中声明，仍会在全局中起作用，不具备块级作用域特性。使用var容易造成全局污染（污染js的作用域）；ES6中，使用let定义变量，在块级作用域中，let只在局部起作用，let可以防止数据污染；常量使用const定义，定义在块级作用域中，并且const必须赋值。是一种保护性机制。
+
+    // let和const特点：不属于顶层window、不存在变量提升、暂时性死区、支持块级作用域；var：相反；
+
+    // for循环举例
+    // 使用var定义变量
+    // var myBtn = document.getElementsByTagName('input');
+    // // console.log(myBtn);
+    // for (let i = 0; i < myBtn.length; i++) {
+    //   myBtn[i].onclick = function () {
+    //     alert(i);
+    //   };
+    // }
+    // 使用var定义i，点击按钮，都是显示6. var i 全局中声明，自始至终只有一个变量。for循环是同步代码，而onclick是异步代码，没有点击按钮之前，for循环已经执行完毕。
+
+
+    // ES5中如何定义常量？
+    // ES5中有一个Object.defineProperty这样一个api，可以定义常量。这个api中接受三个参数
+
+    // 举例：定义常量PI
+    Object.defineProperty(window, 'PI', {
+      value: 3.14,
+      writable: false,
+    });
+
+    console.log(PI);
+    PI = 6;//尝试修改
+    console.log(PI);//仍然是3.14
+  </script>
+</body>
+</html>
