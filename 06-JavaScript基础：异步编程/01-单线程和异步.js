@@ -70,4 +70,30 @@
 // 在浏览器中，setTimeout()/ setInterval() 的每调用一次定时器的最小时间间隔是4毫秒，这通常由于函数嵌套导致，或者由于已经执行的setInterval 的回调函数阻塞导致。所以上面的案例要等到1004毫秒之后，才会从 Event Table 进入 Event Queue
 
 
-// 
+// 异步任务举例
+// 例1 加载图片
+function loadImage(file, success, fail) {
+  const img = new Image();
+  img.src = file;
+  img.onload = () => {
+    //图片加载成功
+    success(img);
+  };
+  img.onerror = () => {
+    // 图片加载失败
+    fail(new Error(`img load fail`));
+  };
+}
+
+loadImage(
+  '../04-JavaScript基础/45-jQuery的介绍和选择器/img/01.jpg', 
+  (img) => {
+    console.log('图片加载成功');
+    document.body.appendChild(img);
+    img.style.border = 'solid 2px red';
+  },
+  (error) => {
+    console.log('图片加载失败');
+    console.log(error);
+  }
+)
