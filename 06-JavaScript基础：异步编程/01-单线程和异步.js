@@ -72,28 +72,51 @@
 
 // 异步任务举例
 // 例1 加载图片
-function loadImage(file, success, fail) {
-  const img = new Image();
-  img.src = file;
-  img.onload = () => {
-    //图片加载成功
-    success(img);
-  };
-  img.onerror = () => {
-    // 图片加载失败
-    fail(new Error(`img load fail`));
-  };
+// function loadImage(file, success, fail) {
+//   const img = new Image();
+//   img.src = file;
+//   img.onload = () => {
+//     //图片加载成功
+//     success(img);
+//   };
+//   img.onerror = () => {
+//     // 图片加载失败
+//     fail(new Error(`img load fail`));
+//   };
+// }
+
+// loadImage(
+//   '../04-JavaScript基础/45-jQuery的介绍和选择器/img/01.jpg', 
+//   (img) => {
+//     console.log('图片加载成功');
+//     document.body.appendChild(img);
+//     img.style.border = 'solid 2px red';
+//   },
+//   (error) => {
+//     console.log('图片加载失败');
+//     console.log(error);
+//   }
+// )
+
+// 举例：定时器计时，移动DOM元素
+// 封装一个定时器，每个间隔delay后，执行callback回调函数
+function myInterval(callback, delay = 100) {
+  let timeId = setInterval(() => callback(timeId), delay)
 }
 
-loadImage(
-  '../04-JavaScript基础/45-jQuery的介绍和选择器/img/01.jpg', 
-  (img) => {
-    console.log('图片加载成功');
-    document.body.appendChild(img);
-    img.style.border = 'solid 2px red';
-  },
-  (error) => {
-    console.log('图片加载失败');
-    console.log(error);
+myInterval((timeId) => {
+  // 每间隔 500毫秒之后，向右移动 .box 元素
+  const myBox = document.getElementsByClassName('box')[0];
+  const left = parseInt(window.getComputedStyle(myBox).left);
+  myBox.style.left = left + 20 + 'px';
+  if (left > 300) {
+      clearInterval(timeId);
+
+      // 每间隔 10 毫秒之后，将 .box 元素的宽度逐渐缩小，直到消失
+      myInterval((timeId2) => {
+          const width = parseInt(window.getComputedStyle(myBox).width);
+          myBox.style.width = width - 1 + 'px';
+          if (width <= 0) clearInterval(timeId2);
+      }, 10);
   }
-)
+}, 200);
