@@ -32,6 +32,8 @@ a:active {
   color: pink
 } */
 
+
+/* 静态伪类 */
 *{
   margin: 0;
   padding: 0;
@@ -73,4 +75,21 @@ a:active {
 
 .nav ul li a:hover{
   background: orange;
+}
+
+table{
+  width: 300px;
+  height: 200px;
+  border: 1px solid blue;
+  /* border-collapse属性：对表格的线进行折叠 */
+  border-collapse: collapse;
+}
+
+/* 鼠标悬停时，当前行显示#868686 */
+table tr:hover{
+  background-color: #868686;
+}
+
+table td{
+  border: 1px solid red;
 }
