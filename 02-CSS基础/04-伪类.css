@@ -1,0 +1,76 @@
+/* 
+  伪类选择器： 同一个标签，根据不同的状态，有不同的样式。这就是伪类，伪类使用冒号表示
+
+  比如 div 是 box 类。但是 a 属于什么类？不明确，因为要看用户点击前和点击后是什么状态。
+
+  伪类选择器分为两种：
+  （1）静态伪类：只能用于超链接的样式。如下：
+  :link 超链接点击之前
+  :visited  超链接被访问之后
+
+  （2）动态伪类：针对所有标签都使用的样式。如下：
+  :hover "悬停"：鼠标放到标签上的时候
+  :active "激活"：鼠标点击标签，但是不松手时
+  :focus 某个标签获得焦点时的样式（比如某个输入框获得焦点）
+
+*/
+
+
+/* a:link {
+  color: red;
+}
+
+a:visited {
+  color: blue
+}
+
+a:hover {
+  color: yellow
+}
+
+a:active {
+  color: pink
+} */
+
+*{
+  margin: 0;
+  padding: 0;
+}
+
+.nav {
+ width: 960px;
+ height: 50px;
+ border: 1px solid red;
+ margin: 100px auto; 
+}
+
+.nav ul {
+  /* 去掉小圆点 */
+  list-style: none;
+}
+
+.nav ul li{
+  float: left;
+  width: 120px;
+  height: 50px;
+  /* 内容水平居中 */
+  text-align: center;
+  /* 让行高等于nav高度，就可以保证垂直居中 */
+  line-height: 50px;
+}
+
+.nav ul li a{
+  display: block;
+  width: 120px;
+  height: 50px;
+}
+
+.nav ul li a:link , .nav ul li a:visited{
+  text-decoration: none;
+  background: purple;
+  color: white;
+}
+
+.nav ul li a:hover{
+  background: orange;
+}
