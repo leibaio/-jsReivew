@@ -1,0 +1,24 @@
+/* 利用 border 画一个三角形 */
+body{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.triangle {  
+  width: 0;
+  height: 0;
+  border-top: 50px solid blue;
+  border-right: 50px solid transparent;
+  border-bottom: none;
+  border-left: 50px solid transparent;
+}
+.triangle1 {  
+  width: 0;
+  height: 0;
+  border-top: 300px solid blue;
+  border-right: 200px solid transparent;
+  border-bottom: none;
+  border-left: 200px solid transparent;
+  border-radius: 20%;
+}
