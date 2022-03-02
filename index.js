@@ -181,3 +181,15 @@
 // const zhangsan = new Person('张三', 20);
 // zhangsan.test();
 // zhangsan.asyncTest();
+
+
+
+// 使用递归完成 1 到 100 的累加
+// function sum(num) {
+//   if (num === 1) {
+//     return 1;
+//   } else {
+//     return num + sum(num-1);
+//   }
+// }
+// console.log(sum(100));

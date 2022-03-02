@@ -177,3 +177,16 @@ function fn() {
 test(fn); // a 2
 ```
 
+### 使用递归完成1到100的累加
+
+```js
+function sum(num) {
+  if (num === 1) {
+    return 1;
+  } else {
+    return num + sum(num-1);
+  }
+}
+console.log(sum(100)); // 5050
+```
+
