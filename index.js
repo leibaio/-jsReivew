@@ -99,3 +99,85 @@
 // console.log(newArr);
 
 
+
+// 闭包1：函数作为返回值
+// function test() {
+//   const a = 1;
+//   return function() {
+//     console.log('a', a);
+//   }
+// }
+
+// const fn = test();
+// const a = 2;
+// fn();
+
+
+// 闭包2: 函数作为参数
+// function test(fn) {
+//   const a = 1;
+//   fn();
+// } 
+
+// const a = 2;
+// function fn() {
+//   console.log('a', a);
+// }
+
+// test(fn);
+
+
+// 作用域和自由变量
+// 子作用域可以访问父作用域，反之不行
+// let a1 = 1;
+
+// function fn1() {
+//   let a2 = 10;
+
+//   function fn2() {
+//     let a3 = 100;
+//     console.log('a2 inside', a2)
+//   }
+
+//   fn2();
+// }
+
+// fn1();
+
+
+// this的值 ： this是在函数执行时决定的，不是在函数定义时决定的
+// function test() {
+//   console.log('this', this);
+// }
+
+// test();
+
+// test.call({ name: 'leibaio' });
+// test.apply({ name: 'leibaio' });
+
+// const boundTest = test.bind({ name: 'leibaio' });
+// boundTest();
+
+
+// class Person {
+//   constructor(name, age) {
+//     console.log('constructor 里的 this', this);
+//     this.name = name;
+//     this.age = age;
+//   }
+
+//   test() {
+//     console.log('对象方法里的 this', this);
+//   }
+
+//   asyncTest() {
+//     console.log('this', this);
+//     setTimeout(function() {
+//       console.log('setTimeout 回调里的 this', this)
+//     }, 0)
+//   }
+// }
+
+// const zhangsan = new Person('张三', 20);
+// zhangsan.test();
+// zhangsan.asyncTest();
