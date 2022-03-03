@@ -181,3 +181,43 @@
 // const zhangsan = new Person('张三', 20);
 // zhangsan.test();
 // zhangsan.asyncTest();
+
+
+
+// // 事件委托
+// document.querySelector('ul').onclick = (event) => {
+//   let target = event.target
+//   if (target.nodeName === 'LI') {
+//     console.log(target.innerHTML);
+//   }
+// }
+
+// // 不使用事件委托
+// document.querySelectorAll('li').forEach((e) => {
+//   e.onclick = function() {
+//     console.log(this.innerHTML);
+//   }
+// })
+
+
+// call apply bind
+let obj = { name: 'tony' };
+
+function Child(name) {
+  this.name = name;
+}
+
+Child.prototype = {
+  constructor: Child,
+  showName: function() {
+    console.log(this.name);
+  }
+}
+
+var child = new Child('thomas');
+child.showName();
+
+child.showName.call(obj);
+child.showName.apply(obj);
+let bind = child.showName.bind(obj); //返回一个函数
+bind();

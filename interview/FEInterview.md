@@ -177,3 +177,114 @@ function fn() {
 test(fn); // a 2
 ```
 
+### JavaScript有几种数据类型
+
+最新的 ECMAScript 标准定义了 8 种数据类型
+
+* 7种原始类型，使用 typeof 检查
+  * undefined
+  * Boolean
+  * Number
+  * String
+  * BigInt
+  * Symbol
+  * null
+* 引用类型：Object
+
+### 如何判断数据类型
+
+```js
+let arr = [1, 2, 3, 4, 5];
+arr instanceof Array; //true
+Object.prototype.toString.call(arr); //'[object Array]'
+
+class Person {
+    constructor(name, age) {
+        this.name = name;
+        this.age = age;
+    } 
+    test() {
+        console.log('this');
+    }
+}
+Object.prototype.toString.call(Person); // '[object Function]'
+```
+
+### console.log(1 + '2') 和 console.log(1 - '2')的打印结果
+
+```js
+console.log(1 + '2'); // 12
+console.log(1 - '2'); // -1
+```
+
+### JS 的事件委托是什么，原理是什么
+
+事件委托，也叫事件代理。事件委托就是利用事件冒泡，只指定一个事件处理程序，就可以管理某一类型的所有事件。让自己的所触发的事件，让他的父元素代替执行。
+
+* 适合事件委托的事件：click、mousedown、mouseup、keydown、keyup、keypress
+* 不适合的：mousemove，每次都要计算位置，不好把控
+
+```html
+  <ul>
+    <li>apple</li>
+    <li>banana</li>
+    <li>pineapple</li>
+  </ul>
+```
+
+
+
+```js
+// 事件委托
+document.querySelector('ul').onclick = (event) => {
+  let target = event.target
+  if (target.nodeName === 'LI') {
+    console.log(target.innerHTML);
+  }
+}
+
+// 不使用事件委托
+document.querySelectorAll('li').forEach((e) => {
+  e.onclick = function() {
+    console.log(this.innerHTML);
+  }
+})
+```
+
+
+
+### 如何改变函数内部的 this 指针的指向
+
+call()	apply()	bind()
+
+**this 永远指向最后调用它的那个对象。**
+
+call() 和 apply() 只有一个区别， call() 接受的是一个参数列表，而apply() 接受的是一个包含多个参数的数组。
+
+call() 和 apply() 改变了函数的 this 上下文后便执行该函数，而 bind() 则是返回改变了上下文后的一个函数。
+
+```js
+let obj = { name: 'tony' };
+
+function Child(name) {
+  this.name = name;
+}
+
+Child.prototype = {
+  constructor: Child,
+  showName: function() {
+    console.log(this.name);
+  }
+}
+
+var child = new Child('thomas');
+child.showName();
+
+// call apply bind 用法
+child.showName.call(obj);
+child.showName.apply(obj);
+let bind = child.showName.bind(obj); //返回一个函数
+bind();
+
+```
+
