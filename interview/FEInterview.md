@@ -388,3 +388,22 @@ console.dir(fn2);
   - 声明箭头函数只要箭头就可以，更加简洁
 * this 指向不同。普通函数的 this 指向函数运行时所在的对象，但箭头函数内部的 this 指向是固定的，相比之下，普通函数的 this 是可变的
 * 箭头函数的 this 不会改变， call、apply、bind 也无法改变
+
+### 随机取1-10之间的整数
+
+js 可以使用 Math() 实现随机数的生成
+
+| 方法     | 描述           |
+| -------- | -------------- |
+| ceil(x)  | 向上取整       |
+| floor(x) | 向下取整       |
+| round(x) | 四舍五入       |
+| random() | 随机生成【0,1] |
+
+```js
+Math.ceil(Math.random()*10); //随机生成 1-10 之间的整数
+Math.floor(Math.random()*10); //随机生成 0-9 之间的整数
+Math.round(Math.round()*10); //均衡获得 0-10的随机整数
+Math.round(Math.random()); //随机生成 0-1 的随机整数
+```
+
