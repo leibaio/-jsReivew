@@ -257,3 +257,13 @@
 // console.log(str6);
 // console.log(str7);
 
+
+// 箭头函数与普通函数的区别
+let fn = name => {
+  console.log(name);
+}
+let fn2 = function(name) {
+  console.log(name);
+}
+console.dir(fn);
+console.dir(fn2);

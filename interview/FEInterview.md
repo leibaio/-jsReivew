@@ -347,7 +347,7 @@ var str7 = str.trimEnd();
 
 ### js 实现继承的方法有哪些
 
-原型链继承、构造函数继承、组合继承、寄生组合继承、ES6中class继承
+原型链继承、构造函数继承（call）、组合继承（call+new）、寄生组合继承（call+寄生式封装）、ES6中class继承
 
 ### 判断一个变量是否是数组，有哪些方法
 
@@ -364,3 +364,27 @@ Array.isArray(arr); // true
 Object.prototype.toString.call(arr); // "[object Array]"
 ```
 
+### let、const、var 有什么区别
+
+ES5中，var是定义变量。即时在区域块中声明，仍会在全局中起作用，不具备块级作用域特性。使用var容易造成全局污染（污染 js 的作用域）；ES6中，使用let定义变量，在块级作用域中，let只在局部起作用，let可以防止数据污染；常量使用const定义，定义在块级作用域中，并且const必须赋值。是一种保护性机制。
+
+ let和const特点：不属于顶层window、不存在变量提升、暂时性死区、支持块级作用域；var：相反；
+
+### 箭头函数和普通函数有什么区别
+
+```js
+let fn = name => {
+  console.log(name);
+}
+let fn2 = function(name) {
+  console.log(name);
+}
+console.dir(fn);
+console.dir(fn2);
+```
+
+* 声明方式不同，匿名函数
+  - 声明一个普通函数需要使用关键词 function 来完成，并且使用 function 既可以声明成一个具名函数，也可以声明为一个匿名函数
+  - 声明箭头函数只要箭头就可以，更加简洁
+* this 指向不同。普通函数的 this 指向函数运行时所在的对象，但箭头函数内部的 this 指向是固定的，相比之下，普通函数的 this 是可变的
+* 箭头函数的 this 不会改变， call、apply、bind 也无法改变
