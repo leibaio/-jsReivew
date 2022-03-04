@@ -259,11 +259,92 @@
 
 
 // 箭头函数与普通函数的区别
-let fn = name => {
-  console.log(name);
-}
-let fn2 = function(name) {
-  console.log(name);
-}
-console.dir(fn);
-console.dir(fn2);
+// let fn = name => {
+//   console.log(name);
+// }
+// let fn2 = function(name) {
+//   console.log(name);
+// }
+// console.dir(fn);
+// console.dir(fn2);
+
+
+// apply
+// let a = { name: '大成' };
+// let b = {
+//   name: '方公子',
+//   sayName: function () {
+//     console.log(this.name);
+//   }
+// }
+// b.sayName();
+// b.sayName.apply(a);
+
+
+// bind
+// function fn(...args) {
+//   console.log(this, args);
+// }
+// let obj = {
+//   name: 'waman',
+// }
+
+// fn.bind(obj, 'z')('w') // {name: 'waman'} {"z", "w"}
+
+
+// 实现一个 bind
+// Function.prototype.mybind = function () {
+//   // 先将参数转换为数组
+//   let args = Array.prototype.slice.apply(arguments);
+//   // 提取参数的第一项，即 this 指向
+//   let _this = args.shift();
+//   // 获取当前 this
+//   let self = this
+//   // 返回一个当前函数的拷贝
+//   return function () {
+//     return self.apply(_this.args)
+//   }
+// }
+
+
+// 使用场景
+// 数组合并
+// let arr1 = [1, 2, 3];
+// let arr2 = [4, 5, 6];
+// let arr3 = [];
+// [].push.apply(arr1, arr2);
+// console.log(arr1); // [1, 2, 3, 4, 5, 6]
+// console.log(arr2); // [4, 5, 6]
+// console.log(arr3); // []
+// [].push.apply(arr3, arr1);
+// console.log(arr3); // [1, 2, 3, 4, 5, 6]
+
+
+// 防抖
+// function debounce (fn, delay = 500) {
+//   // 防抖也是闭包的一个应用
+//   let timer = null
+//   function f () {
+//     if (timer) {
+//       clearTimeout(timer)
+//     }
+//     timer = setTimeout(() => {
+//       fn.apply(this, arguments);
+//     }, delay)
+//   }
+//   return f
+// }
+
+
+//  继承
+// function Father (name) {
+//   this.name = name;
+// }
+
+// function Son (name) {
+//   this.age = 23
+//   Father.call(this, name)
+// }
+
+// let boy = new Son('leibaio')
+// console.log(boy.name, boy.age); // leibaio 23

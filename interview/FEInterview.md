@@ -1,3 +1,5 @@
+
+
 ### 简述同步和异步的区别
 
 同步是阻塞模式，异步是非阻塞模式。
@@ -260,37 +262,132 @@ document.querySelectorAll('li').forEach((e) => {
 
 ### 如何改变函数内部的 this 指针的指向
 
-call()	apply()	bind()
+apply()	call()	bind()
 
 **this 永远指向最后调用它的那个对象。**
+
+apply 接受两个参数，第一个参数就是要指向的 this 对象，第二个对象是函数接收的参数，以数组方式传入（可以把 a 想成 array）。
 
 call() 和 apply() 只有一个区别， call() 接受的是一个参数列表，而apply() 接受的是一个包含多个参数的数组。
 
 call() 和 apply() 改变了函数的 this 上下文后便执行该函数，而 bind() 则是返回改变了上下文后的一个函数。
 
 ```js
-let obj = { name: 'tony' };
-
-function Child(name) {
-  this.name = name;
-}
-
-Child.prototype = {
-  constructor: Child,
-  showName: function() {
+// apply()
+let a = { name: '大成' };
+let b = {
+  name: '方公子',
+  sayName: function () {
     console.log(this.name);
   }
 }
-
-var child = new Child('thomas');
-child.showName();
-
-// call apply bind 用法
-child.showName.call(obj);
-child.showName.apply(obj);
-let bind = child.showName.bind(obj); //返回一个函数
-bind();
+b.sayName(); //方公子
+b.sayName.apply(a); //大成
 ```
+
+**注意：**当传第一个参数是 null 或者 undefined 时候，默认指向 window 浏览器下
+
+`````````js
+fn.apply(null, [1, 2]); //this指向window
+fn.apply(undefined, [1, 2]); //this指向window
+`````````
+
+```js
+// call()
+function fn(...args) {
+  console.log(this, args);
+}
+let obj = {
+  name: 'yanagi'
+}
+
+fn.call(obj, 1, 2); // this会指向obj
+fn(1, 2); // 指向window
+```
+
+bind() 和 call() 相似，第一个参数是 this 指向，传入的也是一个参数列表，但 bind 不会立即执行，而是返回一个改变 this 指向后的函数的拷贝，参数可以分多次传
+
+```js
+// bind()
+function fn(...args) {
+  console.log(this, args);
+}
+let obj = {
+  name: 'waman',
+}
+
+fn.bind(obj, 'z')('w') // {name: 'waman'} {"z", "w"}
+```
+
+实现一个 bind
+
+```js
+Function.prototype.mybind = function () {
+  // 先将参数转换为数组
+  let args = Array.prototype.slice.apply(arguments);
+  // 提取参数的第一项，即 this 指向
+  let _this = args.shift();
+  // 获取当前 this
+  let self = this
+  // 返回一个当前函数的拷贝
+  return function () {
+    return self.apply(_this.args)
+  }
+}
+```
+
+使用场景
+
+* 数组合并
+
+```js
+// 数组合并
+let arr1 = [1, 2, 3];
+let arr2 = [4, 5, 6];
+let arr3 = [];
+[].push.apply(arr1, arr2);
+console.log(arr1); // [1, 2, 3, 4, 5, 6]
+console.log(arr2); // [4, 5, 6]
+console.log(arr3); // []
+[].push.apply(arr3, arr1);
+console.log(arr3); // [1, 2, 3, 4, 5, 6]
+```
+
+* 防抖
+
+```js
+function debounce (fn, delay = 500) {
+  // 防抖也是闭包的一个应用
+  let timer = null
+  function f () {
+    if (timer) {
+      clearTimeout(timer)
+    }
+    timer = setTimeout(() => {
+      fn.apply(this, arguments);
+    }, delay)
+  }
+  return f
+}
+```
+
+* 继承
+
+```js
+function Father (name) {
+  this.name = name;
+}
+
+function Son (name) {
+  this.age = 23
+  Father.call(this, name)
+}
+
+let boy = new Son('leibaio')
+console.log(boy.name, boy.age); // leibaio 23
+```
+
+
 
 ###  列举几种解决跨域问题的方式，且说明原理
 
@@ -406,4 +503,6 @@ Math.floor(Math.random()*10); //随机生成 0-9 之间的整数
 Math.round(Math.round()*10); //均衡获得 0-10的随机整数
 Math.round(Math.random()); //随机生成 0-1 的随机整数
 ```
+
+### new 操作符具体干了什么
 
