@@ -193,3 +193,67 @@
 //   }
 // }
 // console.log(sum(100));
+
+// // 事件委托
+// document.querySelector('ul').onclick = (event) => {
+//   let target = event.target
+//   if (target.nodeName === 'LI') {
+//     console.log(target.innerHTML);
+//   }
+// }
+
+// // 不使用事件委托
+// document.querySelectorAll('li').forEach((e) => {
+//   e.onclick = function() {
+//     console.log(this.innerHTML);
+//   }
+// })
+
+
+// // call apply bind
+// let obj = { name: 'tony' };
+
+// function Child(name) {
+//   this.name = name;
+// }
+
+// Child.prototype = {
+//   constructor: Child,
+//   showName: function() {
+//     console.log(this.name);
+//   }
+// }
+
+// var child = new Child('thomas');
+// child.showName();
+
+// child.showName.call(obj);
+// child.showName.apply(obj);
+// let bind = child.showName.bind(obj); //返回一个函数
+// bind();
+
+
+
+// 去除字符串空格
+// 1. replace 正则
+// 去除字符串内所有空格：str =str.replace(/\s*/g, "");
+// var str = "  qwe t w asd qwe ";
+// var str1 = str.replace(/\s*/g, ""); // 所有 
+// var str2 = str.replace(/^\s*/, ""); // 左侧
+// var str3 = str.replace(/\s*$/g, ""); // 右侧
+// var str4 = str.replace(/^\s*|\s*$/g, ""); //两侧
+
+// // 2. trim()
+// var str5 = str.trim(); // 两侧
+// var str6 = str.trimStart();
+// var str7 = str.trimEnd();
+
+// console.log(str);
+// console.log(str1);
+// console.log(str2);
+// console.log(str3);
+// console.log(str4);
+// console.log(str5);
+// console.log(str6);
+// console.log(str7);
+

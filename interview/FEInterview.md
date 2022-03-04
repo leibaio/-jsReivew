@@ -188,5 +188,161 @@ function sum(num) {
   }
 }
 console.log(sum(100)); // 5050
+### JavaScript有几种数据类型
+
+最新的 ECMAScript 标准定义了 8 种数据类型
+
+* 7种原始类型，使用 typeof 检查
+  * undefined
+  * Boolean
+  * Number
+  * String
+  * BigInt
+  * Symbol
+  * null
+* 引用类型：Object
+
+
+let arr = [1, 2, 3, 4, 5];
+arr instanceof Array; //true
+Object.prototype.toString.call(arr); //'[object Array]'
+
+class Person {
+    constructor(name, age) {
+        this.name = name;
+        this.age = age;
+    } 
+    test() {
+        console.log('this');
+    }
+}
+Object.prototype.toString.call(Person); // '[object Function]'
 ```
 
+### console.log(1 + '2') 和 console.log(1 - '2')的打印结果
+
+```js
+console.log(1 + '2'); // 12
+console.log(1 - '2'); // -1
+```
+
+### JS 的事件委托是什么，原理是什么
+
+事件委托，也叫事件代理。事件委托就是利用事件冒泡，只指定一个事件处理程序，就可以管理某一类型的所有事件。让自己的所触发的事件，让他的父元素代替执行。
+
+* 适合事件委托的事件：click、mousedown、mouseup、keydown、keyup、keypress
+* 不适合的：mousemove，每次都要计算位置，不好把控
+
+```html
+  <ul>
+    <li>apple</li>
+    <li>banana</li>
+    <li>pineapple</li>
+  </ul>
+```
+
+```js
+// 事件委托
+document.querySelector('ul').onclick = (event) => {
+  let target = event.target
+  if (target.nodeName === 'LI') {
+    console.log(target.innerHTML);
+  }
+}
+
+// 不使用事件委托
+document.querySelectorAll('li').forEach((e) => {
+  e.onclick = function() {
+    console.log(this.innerHTML);
+  }
+})
+```
+
+### 如何改变函数内部的 this 指针的指向
+
+call()	apply()	bind()
+
+**this 永远指向最后调用它的那个对象。**
+
+call() 和 apply() 只有一个区别， call() 接受的是一个参数列表，而apply() 接受的是一个包含多个参数的数组。
+
+call() 和 apply() 改变了函数的 this 上下文后便执行该函数，而 bind() 则是返回改变了上下文后的一个函数。
+
+```js
+let obj = { name: 'tony' };
+
+function Child(name) {
+  this.name = name;
+}
+
+Child.prototype = {
+  constructor: Child,
+  showName: function() {
+    console.log(this.name);
+  }
+}
+
+var child = new Child('thomas');
+child.showName();
+
+// call apply bind 用法
+child.showName.call(obj);
+child.showName.apply(obj);
+let bind = child.showName.bind(obj); //返回一个函数
+bind();
+```
+
+###  列举几种解决跨域问题的方式，且说明原理
+
+什么是跨域？当协议、子域名、主域名、端口号中任意一个不相同时，都算作不同域。不同域之间相互请求资源，就算跨域。
+
+解决方案以及原理：
+
+1. jsonp：客户端利用 script 标签可以跨域请求资源的性质，向网页中动态插入 script 标签，向服务端请求数据；服务端会解析请求的 url，至少拿到一个回调函数参数，之后将数据放入其中返回客户端；jsonp 不同于平常的 ajax 请求，仅仅支持 get 类型的方式
+2. cors：
+3. postMessage
+4. websocket
+5. Node中间件代理
+6. nginx反向代理
+7. iframe
+
+### 谈谈垃圾回收机制及内存管理
+
+项目中，如果存在大量不被释放的内存（堆/栈/上下文），页面性能会被影响。
+
+浏览器JS 具有垃圾回收机制（GC），垃圾收集器会定期找到那些不再继续使用的变量，然后释放内存。
+
+**标记清除：**当变量进入执行环境，被标记为“进入环境”，离开时会被标记为“离开环境”。垃圾回收器会销毁带标记的值并回收他们所占的内存空间。
+
+**Chrome：**“查找引用”，浏览器不定时去查找当前内存的引用，如果没被占用，就会回收。
+
+**ie：**“引用计数法”，当前内存被占用一次，计数累加一次，移除就减一，减到零时，浏览器就会回收。
+
+### 写一个 function，清除字符串前后的空格
+
+```js
+// 方法一：replace 正则匹配
+// 去除字符串所有空格：str = str.replace(/\s*/g,"")
+// 去除两头空格：str = str.replafce(/^\s*|\s*$/g,"")
+// 去除左侧空格：str = str.replace(/^\s*/,"")
+// 去除右侧空格：str = str.replace(/(\s*$)/g,"")
+
+var str = "  qwe t w asd qwe ";
+var str1 = str.replace(/\s*/g, ""); // 所有 
+var str2 = str.replace(/^\s*/, ""); // 左侧
+var str3 = str.replace(/\s*$/g, ""); // 右侧
+var str4 = str.replace(/^\s*|\s*$/g, ""); //两侧
+console.log(str); //    qwe t w asd qwe 
+console.log(str1);//qwetwasdqwe
+console.log(str2);//qwe t w asd qwe 
+console.log(str3);//   qwe t w asd qwe
+console.log(str4);//qwe t w asd qwe
+
+// 方法二：str.trim() : 删除字符串两端空白并返回，不影响原来字符串，返回新的字符串
+// 2. trim()
+var str5 = str.trim(); // 两侧
+var str6 = str.trimStart();
+var str7 = str.trimEnd();
+```
+
+### js 实现继承的方法有哪些
