@@ -351,3 +351,16 @@ var str7 = str.trimEnd();
 
 ### 判断一个变量是否是数组，有哪些方法
 
+```js
+var arr = [1, 2, 3, 4]；
+// instanceof
+console.log(arr instanceof Array); // true
+// constructor
+console.log(arr.constructor === Array); // true
+console.log(arr.__proto__.constructor === Array); // true
+// Array.isArray
+Array.isArray(arr); // true
+// Object.prototype.toString.call
+Object.prototype.toString.call(arr); // "[object Array]"
+```
+
