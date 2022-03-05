@@ -348,3 +348,64 @@
 
 // let boy = new Son('leibaio')
 // console.log(boy.name, boy.age); // leibaio 23
+
+
+
+// new 操作符具体干了什么
+// function Person(name, age) {
+//   this.name = name;
+//   this.age = age;
+// }
+
+// Person.prototype.sayName = function () {
+//   console.log(this.name);
+// }
+
+// const person1 = new Person('James', 23);
+// console.log(person1); // Person {name: "James", age: 23}
+
+// person1.sayName(); // James
+
+// 在构建函数中显式加上返回值，并且返回值是一个原始类型
+// function Test(name) {
+//   this.name = name;
+//   return 1;
+// }
+// const t = new Test('xxx');
+// console.log(t)  // Test {name: "xxx"}
+
+// 在构造函数中返回一个对象
+// function Test(name) {
+//   this.name = name;
+//   console.log(this);
+//   return {
+//     age: 26
+//   }
+// }
+// const t = new Test('xxx'); // Test {name: "xxx"}
+// console.log(t); //  {age: 26}
+// console.log(t.name); // undefined
+
+
+// 实现一个 new
+function new1(Func, ...args) {
+  // 1.创建一个新对象
+  const obj = {};
+  // 2.将新对象原型指向构造函数原型对象
+  obj.__proto__ = Func.prototype;
+  // 3. 将构造函数的this指向新对象
+  let result = Func.apply(obj, args);
+  // 4. 根据返回值判断
+  return result instanceof Object ? result : obj;
+}
+// 测试一下
+function Person(name, age) {
+  this.name = name;
+  this.age = age;
+}
+Person.prototype.say = function () {
+  console.log(this.name);
+}
+let p = new1 (Person, 'Hamilton', 33);
+console.log(p); //  Person {name: "Hamilton", age: 33}
+p.say(); // Hamilton
