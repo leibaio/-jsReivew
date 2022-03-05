@@ -586,3 +586,8 @@ console.log(p); //  Person {name: "Hamilton", age: 33}
 p.say(); // Hamilton
 ```
 
+### Ajax 原理
+
+
+
+<img src="https://pic.rmb.bdstatic.com/bjh/709e79f2c1899fbf67c1f6bee7be2e22.jpeg" alt="image.png"  />
