@@ -1,4 +1,4 @@
-
+****
 
 ### 简述同步和异步的区别
 
@@ -588,6 +588,23 @@ p.say(); // Hamilton
 
 ### Ajax 原理
 
+Ajax 全称 Async JavaScript and XML，异步的  JavaScript 和 XML，可以在不重新加载整个网页的情况下，与服务器交换数据，并且更新部分网页。
 
+原理简单来说，就是通过 XMLHttpRequest 对象向服务器发送异步请求，从服务器获得数据，然后用 JavaScript 来操作 DOM 而更新页面。
 
 <img src="https://pic.rmb.bdstatic.com/bjh/709e79f2c1899fbf67c1f6bee7be2e22.jpeg" alt="image.png"  />
+
+举个例子：领导找小李汇报一下工作，就委托秘书去叫小李，自己接着做其他事情，直到秘书高速他小李已经到了，最后小李汇报工作。
+
+Ajax 请求数据相当于 “领导想找小李汇报工作”，秘书就相当于 XMLHttpRequest 对象，领导相当于浏览器，响应数据相当于小李。浏览器发送 HTTP 请求后，接着做其他事情，直到 XHR 返回数据再进行操作。
+
+#### 实现过程：
+
+实现 Ajax 异步交互需要服务器逻辑进行配合，需要完成以下步骤：
+
+* 创建 Ajax 的核心对象 XMLHttpRequest 对象
+* 通过 XHR 对象的 open() 方法与服务端建立连接
+* 构建请求所需的数据内容，并通过 XHR 对象的 send() 方法发送给服务端
+* 通过 XHR 对象提供的 onreadystatechange 事件监听服务器端的通信状态
+* 接受并处理服务端向客户端响应的数据结果
+* 将处理结果更新到 HTML 页面中
