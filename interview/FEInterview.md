@@ -608,3 +608,11 @@ Ajax 请求数据相当于 “领导想找小李汇报工作”，秘书就相�
 * 通过 XHR 对象提供的 onreadystatechange 事件监听服务器端的通信状态
 * 接受并处理服务端向客户端响应的数据结果
 * 将处理结果更新到 HTML 页面中
+
+### 模块化开发怎么做
+
+#### 介绍
+
+模块（Module），是指能够单独命名并独立地完成一定功能的程序语句的集合。
+
+CommonJs（典型代表：node.js 早期）、AMD（Asynchronous Module Definition）（典型代表：require.js）、CMD（典型代表：sea.js）
