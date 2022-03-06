@@ -616,3 +616,53 @@ Ajax 请求数据相当于 “领导想找小李汇报工作”，秘书就相�
 模块（Module），是指能够单独命名并独立地完成一定功能的程序语句的集合。
 
 CommonJs（典型代表：node.js 早期）、AMD（Asynchronous Module Definition）（典型代表：require.js）、CMD（典型代表：sea.js）
+
+### slice、splice、split
+
+#### slice
+
+从数组中截取任意个元素，返回结果为新的数组。不改变原来数组。
+
+语法： 新数组 = 原数组.slice(开始位置的索引，结束位置的索引); [a, b)
+
+```js
+// slice: 截取，不改变原数组
+const arr = ['a', 'b', 'c', 'd', 'e', 'f'];
+console.log(arr.slice()); // 无参数截取所有
+console.log(arr.slice(2)); // 从第二个到末位
+console.log(arr.slice(-2)); // 截取最后两个。 -2 + 6 = 4
+console.log(arr.slice(2, 4)); // 第二个到第四个（不包括第四个）
+console.log(arr.slice(4, 2)); // 空
+```
+
+ES6 版
+
+```js
+array = Array.from(arr);
+```
+
+#### splice
+
+从数组中删除任意个元素（可以是负的，即增加）。返回结果为被删除元素组成的新数组。 会改变原数组。
+
+语法： 新数组 = 原数组.splice(起始索引index，需要删除的个数);
+
+ 新数组 = 原数组.splice(起始索引index，需要删除的个数, 新的元素1, 新的元素2 ...)；
+
+```js
+// splice：
+var arr1 = ['a', 'b', 'c', 'd', 'e', 'f'];
+// console.log(arr1.splice(1)); //从index为1的地方开始删除元素
+// console.log(arr1.splice(-2)); // 删除最后两个元素
+// console.log(arr1.splice(1, 3)); // 从index为1的地方删除到 index为3的
+//增加系列
+// console.log(arr1.splice(0, 0, 'g', 'h'));
+// console.log(arr1.splice(0, 2, 'vue', 'h'));
+```
+
+#### split
+
+```js
+新的数组 = str.split(分隔符)；
+```
+

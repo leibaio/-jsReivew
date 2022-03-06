@@ -388,24 +388,46 @@
 
 
 // 实现一个 new
-function new1(Func, ...args) {
-  // 1.创建一个新对象
-  const obj = {};
-  // 2.将新对象原型指向构造函数原型对象
-  obj.__proto__ = Func.prototype;
-  // 3. 将构造函数的this指向新对象
-  let result = Func.apply(obj, args);
-  // 4. 根据返回值判断
-  return result instanceof Object ? result : obj;
-}
-// 测试一下
-function Person(name, age) {
-  this.name = name;
-  this.age = age;
-}
-Person.prototype.say = function () {
-  console.log(this.name);
-}
-let p = new1 (Person, 'Hamilton', 33);
-console.log(p); //  Person {name: "Hamilton", age: 33}
-p.say(); // Hamilton
+// function new1(Func, ...args) {
+//   // 1.创建一个新对象
+//   const obj = {};
+//   // 2.将新对象原型指向构造函数原型对象
+//   obj.__proto__ = Func.prototype;
+//   // 3. 将构造函数的this指向新对象
+//   let result = Func.apply(obj, args);
+//   // 4. 根据返回值判断
+//   return result instanceof Object ? result : obj;
+// }
+// // 测试一下
+// function Person(name, age) {
+//   this.name = name;
+//   this.age = age;
+// }
+// Person.prototype.say = function () {
+//   console.log(this.name);
+// }
+// let p = new1 (Person, 'Hamilton', 33);
+// console.log(p); //  Person {name: "Hamilton", age: 33}
+// p.say(); // Hamilton
+
+
+
+// slice: 截取，不改变原数组
+// const arr = ['a', 'b', 'c', 'd', 'e', 'f'];
+// console.log(arr.slice()); // 无参数截取所有
+// console.log(arr.slice(2)); // 从第二个到末位
+// console.log(arr.slice(-2)); // 截取最后两个。 -2 + 6 = 4
+// console.log(arr.slice(2, 4)); // 第二个到第四个（不包括第四个）
+// console.log(arr.slice(4, 2)); // 空
+
+
+
+// splice：
+var arr1 = ['a', 'b', 'c', 'd', 'e', 'f'];
+// console.log(arr1.splice(1)); //从index为1的地方开始删除元素
+// console.log(arr1.splice(-2)); // 删除最后两个元素
+// console.log(arr1.splice(1, 3)); // 从index为1的地方删除到 index为3的
+//增加系列
+// console.log(arr1.splice(0, 0, 'g', 'h'));
+// console.log(arr1.splice(0, 2, 'vue', 'h'));
+
