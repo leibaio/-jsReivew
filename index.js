@@ -493,5 +493,3 @@
 //   await promise3(2000);
 //   console.log('ok')
 // }
-
-async function foo() {
