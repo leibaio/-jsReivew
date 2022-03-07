@@ -423,7 +423,7 @@
 
 
 // splice：
-var arr1 = ['a', 'b', 'c', 'd', 'e', 'f'];
+// var arr1 = ['a', 'b', 'c', 'd', 'e', 'f'];
 // console.log(arr1.splice(1)); //从index为1的地方开始删除元素
 // console.log(arr1.splice(-2)); // 删除最后两个元素
 // console.log(arr1.splice(1, 3)); // 从index为1的地方删除到 index为3的
@@ -431,3 +431,65 @@ var arr1 = ['a', 'b', 'c', 'd', 'e', 'f'];
 // console.log(arr1.splice(0, 0, 'g', 'h'));
 // console.log(arr1.splice(0, 2, 'vue', 'h'));
 
+
+
+// js异步处理的三种方式
+// 回调函数 （Callback）
+// const fs = require('fs');
+// fs.readFile('./package.json', (err, info) => {
+//   fs.writeFile('./p.json', info, (err) => {
+//     if (!err) {
+//       setTimeout(() => {
+//         console.log('ok')
+//       }, 2000);
+//     }
+//   })
+// })
+
+
+// Promise
+// const fs = require('fs');
+// const { setTimeout } = require('timers/promises');
+// const promise1 = new Promise((resolve, reject) => {
+//   fs.readFile('./package.json', (err, info) => {
+//     resolve(info);
+//   })
+// })
+// const promise2 = (info) => {
+//   new Promise((resolve, reject) => {
+//     fs.writeFile('./p.json', info, (err) => {
+//       if (!err) {
+//         resolve();
+//       } else {
+//         reject();
+//       }
+//     })
+//   })
+// }
+// const promise3 = (time) => {
+//   return new Promise((resolve, reject) => {
+//     setTimeout(() => {
+//       resolve();
+//     }, time);
+//   })
+// }
+// // then 链式调用
+// // 读文件成功，结果作为参数传入 promise2
+// promise1.then((info) => {
+//   return promise2(info);
+// }).then(() => {
+//   // 等待前面的promise
+//   console.log('读写完成');
+//   return promise3(2000)
+// }).then(() => {
+//   console.log('ok');
+// })
+
+
+// async + await 语法糖
+// async function run() {
+//   let info = await promise1;
+//   await promise2(info);
+//   await promise3(2000);
+//   console.log('ok')
+// }

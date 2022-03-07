@@ -666,3 +666,83 @@ var arr1 = ['a', 'b', 'c', 'd', 'e', 'f'];
 新的数组 = str.split(分隔符)；
 ```
 
+### 异步加载 js 方式有哪些
+
+#### 回调函数
+
+````js
+const fs = require('fs');
+fs.readFile('./package.json', (err, info) => {
+  fs.writeFile('./p.json', info, (err) => {
+    if (!err) {
+      setTimeout(() => {
+        console.log('ok')
+      }, 2000);
+    }
+  })
+})
+````
+
+通过回调函数嵌套，从文件系统中读取一个 ./package.json 文件并写入 ./p.json，读取后两秒后输出 'ok'。如果添加多个异步函数，代码可读性会变差，修复过程也困难，这就是 回调函数地狱
+
+#### Promise
+
+三个状态：成功 Fulfilled、失败 Rejected、处理中 Pending
+
+默认 Pending 如果调用 resolve fulfilled
+
+默认 Pending 如果调用 reject rejected
+
+```js
+const fs = require('fs');
+const { setTimeout } = require('timers/promises');
+const promise1 = new Promise((resolve, reject) => {
+  fs.readFile('./package.json', (err, info) => {
+    resolve(info);
+  })
+})
+const promise2 = (info) => {
+  new Promise((resolve, reject) => {
+    fs.writeFile('./p.json', info, (err) => {
+      if (!err) {
+        resolve();
+      } else {
+        reject();
+      }
+    })
+  })
+}
+const promise3 = (time) => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve();
+    }, time);
+  })
+}
+// then 链式调用
+// 读文件成功，结果作为参数传入 promise2
+promise1.then((info) => {
+  return promise2(info);
+}).then(() => {
+  // 等待前面的promise
+  console.log('读写完成');
+  return promise3(2000)
+}).then(() => {
+  console.log('ok');
+})
+```
+
+#### async + await 语法糖
+
+```js
+async function run() {
+  let info = await promise1;
+  await promise2(info);
+  await promise3(2000);
+  console.log('ok')
+}
+```
+
+使用 async + await 代替了 .then() 方法
+
+async 必须在函数声明前，await 接一个 promise，后面的代码就会等待，等到 resolve 才运行
