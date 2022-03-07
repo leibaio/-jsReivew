@@ -746,3 +746,10 @@ async function run() {
 使用 async + await 代替了 .then() 方法
 
 async 必须在函数声明前，await 接一个 promise，后面的代码就会等待，等到 resolve 才运行
+
+### xml 和 json 的区别
+
+* 数据体量方面，JSON 数据体量更小，传输速度更快
+* 数据交互方面，JSON 与 js 的文本更加方便，交互方式更加灵活
+* 数据描述方面，JSON 对数据的描述性比 XML 差
+* 传输速度方面，JSON 要远快于 XML
