@@ -747,7 +747,7 @@ async function run() {
 
 async 必须在函数声明前，await 接一个 promise，后面的代码就会等待，等到 resolve 才运行
 
-### xml 和 json 的区别
+### XML 和 JSON 的区别
 
 * 数据体量方面，JSON 数据体量更小，传输速度更快
 * 数据交互方面，JSON 与 js 的文本更加方便，交互方式更加灵活
@@ -758,7 +758,239 @@ async 必须在函数声明前，await 接一个 promise，后面的代码就会
 
 require 是运行时调用，因此理论上可以放在代码任何地方；import 是编译时调用，因此必须放在文件开头
 
+### 随机取 1-10 之间的整数
+
+利用 floor 函数向下取整
+
+```js
+let randomIntNum = Math.floor(Math.random() * 10 + 1)
+
+console.log(randomIntNum)
+```
+
+### BFC
+
+块格式化上下文。是一块独立的布局环境，保护其内部元素不受外部影响，也不影响外部。本身 BFC 是一种 CSS 布局方式，我们可以利用它来解决外边距折叠问题。
+
+### 回流和重绘
+
+引起元素位置变化的就会 reflow，比如窗口大小改变、字体大小改变、元素位置变化等会引起周围元素变化的；不会引起位置变化的，还是在以前位置的，比如更改背景颜色的，只会 repaint
+
+### 微任务 宏任务
+
+微任务和宏任务是**异步任务**的两个分类。
+
+* 宏任务：当前调用栈中执行的代码成为宏任务。（主代码块，定时器等）。
+
+* 微任务：当前（此次事件循环中）宏任务执行完，下一个宏任务开始之前需要执行的任务，可以理解为回调事件。（Promise.then，nextTick 等）
+
+宏任务一般是：包括整体代码 `script`，`setTimeout`，`setInterval`、`I/O`、`UI render`。
+微任务主要是：`Promise`、`Object.observe`、`MutationObserver`。
 
 
 
+**顺序：**
 
+第一步，先按同步代码顺序运行
+
+第二步，开始清空微任务队列
+
+第三步，开始清空宏任务队列（执行一个宏任务，把相关微任务添加入微任务队列）
+
+第四步：开始清空微任务队列（上一个执行宏任务中加入队列的微任务一次性全部执行完成）
+
+第五步：开始清空宏任务队列（执行下一个宏任务，把相关微任务添加入微任务队列）
+
+.......... 循环一直到执行完成
+
+
+
+**举例：**
+
+```js
+console.log('sync statement 1')
+Promise.resolve().then(function() {
+    console.log('micro task 1')
+    setTimeout(function() {
+        console.log('macro task 1')
+    }, 0)
+}).then(function() {
+    console.log('micro task 2')
+})
+
+setTimeout(function() {
+    console.log('macro task 2')
+    Promise.resolve().then(function() {
+        console.log('micro task 3')
+    })
+}, 0)
+
+console.log('sync statement 2')
+```
+
+执行结果：
+
+```bash
+> sync statement 1
+> sync statement 2
+> micro task 1
+> micro task 2
+> macro task 2
+> micro task 3
+> macro task 1
+```
+
+### nextTick
+
+微任务，将回调延迟到下次 DOM 更新循环之后执行。在修改数据之后立即使用它，然后等待 DOM 更新。
+
+### DOM 操作
+
+Document Object Model，文档对象模型，有`文档`、`元素`、`节点`这样几个概念。
+
+整个文档是一个文档节点，每个标签是一个元素节点，包含在元素中的文本是文本节点，元素上的属性是属性节点，文档中的注释是注释节点。
+
+**DOM 本质是 DOM 树：**DOM 树是结构，树是由 DOM 元素和属性节点组成的，DOM 的本质是把 HTML 结构化成 JS 可以识别的树模型；有了树模型，就有了层级结构，层级结构是指元素和元素之间的关系，父子、兄弟
+
+下面是 HTML 文档：
+
+```html
+<html>
+    <head>
+        <title>文档标题</title>
+    </head>
+    <body>
+	    <a href="#">链接</a>
+        <h1>标题</h1>
+    </body>
+</html>
+```
+
+DOM 树如下：
+
+![image.png](https://pic.rmb.bdstatic.com/bjh/1e32552c415cce7ba4ac075d5dffe23a.jpeg)
+
+**DOM 节点操作：**
+
+```html
+<html>
+    <div class="father">
+        <div id="box" class ="item" name="myBox">asdzxcqwe</div>
+    </div>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+    </ul>
+</html>
+
+```
+
+```css
+#box {
+    width: 100px;
+    height: 100px;
+}
+
+.item {
+    background-color: #fff
+}
+```
+
+* DOM 获取
+
+```js
+// 通过 id 获取单个元素
+let oBox = document.getElementById('box')
+console.log(oBox) // <div id="box" class="item" style="background-color: black; width: 200px; color: white;"><h1>hello</h1></div>
+
+
+// 通过 class 获取一组元素
+let oBox2 = document.getElementsByClassName('item')
+console.log(oBox2) // 
+
+console.log(oBox == oBox2[0]) // true
+
+// 通过 TagName 获取到是一组元素，同上
+let oBox3 = document.getElementsByTagName('div')[0]
+console.log(oBox3) // <div id="box" class="item" style="background-color: black; width: 200px; color: white;"><h1>hello</h1></div>
+
+// 通过 name 获得的 NodeList 
+let oBox4 = document.getElementsByName('myBox')
+console.log(oBox4) // NodeList [div#box.item]
+
+// h5 新增两种
+// 获取单个
+let item = document.querySelector('.item')
+// 获取组合
+let items = document.querySelectorAll('.item')
+console.log(item) // <div id="box" class="item" name="myBox" style="background-color: black; width: 200px; color: white;"><h1>hello</h1></div>
+console.log(items) // NodeList [div#box.item]
+
+// body
+let body = document.body
+
+// html
+let html = document.documentElement
+```
+
+* 添加节点
+
+````js
+let fa = document.querySelectorAll('.father')[0]
+
+// 创建文本节点
+let text = document.createTextNode('hello')
+// 创建元素节点
+let tag = document.createElement('H1')
+
+tag.appendChild(text)
+fa.appendChild(tag)
+````
+
+* 删除节点
+
+```js
+// 获取父元素
+let oUl = document.querySelector('ul')
+// 获取子元素
+let oLi = document.querySelectorAll('li')[1]
+
+oUl.removeChild(oLi)
+```
+
+* 替换节点
+
+```js
+// 获取父元素
+let oUl = document.querySelector('ul')
+// 获取子元素
+let oLi = document.querySelectorAll('li')
+
+oUl.replaceChild(oLi[1], oLi[2])
+```
+
+* 插入
+
+```js
+// 获取父元素
+let oUl = document.querySelector('ul')
+// 获取子元素
+let oLi = document.querySelectorAll('li')
+
+let other = document.createElement('h1')
+other.innerText = 'qweasdzxc'
+
+oUl.insertBefore(other, oLi[0])
+```
+
+### DOM 相关问题：
+
+1. DOM 常用 API ?
+   * 获取 DOM 节点，以及节点的 Property 和 Attribute
+   * 获取父节点和子节点
+   * 新增、删除节点
+2. DOM 节点的 Property 和 Attribute 区别
+   * Property 是一个 JS 对象的属性的修改
+   * Attribute 是对 HTML 标签属性的修改
+3. DOM 属性优化
