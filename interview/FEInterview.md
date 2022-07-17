@@ -4,7 +4,7 @@
 
 同步是阻塞模式，异步是非阻塞模式。
 
-同步是指同一个进程在执行某个请求时，若该请求需要一段时间才能返回信息，那么进程会一直等待下去，直到收到返回信息后才继续执行。
+同步是指同一个进程在执行某个请求时，若该请求需要一段时间才能返回信息，那么进程会一直等待下去，直到收到返回信息后才继续执行。 
 
 异步是指进程不需要一直等待，而是继续执行下面的操作，不管其他进程。当有消息返回，系统进行处理，提高执行效率。
 
@@ -990,7 +990,72 @@ oUl.insertBefore(other, oLi[0])
    * 获取 DOM 节点，以及节点的 Property 和 Attribute
    * 获取父节点和子节点
    * 新增、删除节点
+   
 2. DOM 节点的 Property 和 Attribute 区别
    * Property 是一个 JS 对象的属性的修改
    * Attribute 是对 HTML 标签属性的修改
+   
 3. DOM 属性优化
+
+   将频繁的操作改为一次性操作，通过创建文档碎片，最后一次性加入文档碎片
+
+   ```js
+   const listNode = document.getElementById('list')
+   
+   // 创建一个文档片段，此时还没有插入到 DOM 树
+   const frag = document.createDocumentFragment()
+   
+   // 执行插入
+   for (let x = 0; x < 10; x++) {
+       const li = document.createElement('li')
+       li.innerHTML = 'List item ' + x
+       frag.appendChild(li)
+   }
+   
+   // 都完成之后，再插入 DOM 树中
+   listNode.appendChild(frag)
+   ```
+
+## 一行 JS
+
+### Array
+
+1. Cast a value as an array（将值转为数组）
+
+```js
+const castArray = (value) => (Array.isArray(value) ? value : [value])
+
+console.log(castArray(1))
+console.log(castArray([1, 2, 3]))
+
+> [1]
+> [1,2,3]
+```
+
+2. Check if an array is empty（检查数组是否为空）
+
+```js
+const isEmpty = (arr) => Array.isArray(arr) && !arr.length
+
+console.log(isEmpty([]))
+console.log(isEmpty([1, 2]))
+
+> true
+> false
+```
+
+3. Clone an array（克隆数组）
+
+```js
+const clone = (arr) => arr.slice(0)
+
+// Or
+const clone = (arr) => [...arr]
+
+// Or
+const clone = (arr) => Array.from(arr)
+
+// Or
+const clone = (arr) => arr.map((x) => x)
+```
+
