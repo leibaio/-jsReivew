@@ -1016,7 +1016,7 @@ oUl.insertBefore(other, oLi[0])
    listNode.appendChild(frag)
    ```
 
-## 一行 JS
+## 一行 JS https://1loc.dev/
 
 ### Array
 
@@ -1057,5 +1057,73 @@ const clone = (arr) => Array.from(arr)
 
 // Or
 const clone = (arr) => arr.map((x) => x)
+
+// Or
+const clone = (arr) => JSON.parse(JSON.stringify(arr))
+
+// Or
+const clone = (arr) => arr.concat([])
+
+// Or
+const clone = (arr) => structuredClone(arr)
 ```
+
+4. Compare two arrays regardless of order（比较两个数组无视顺序）
+
+```js
+const isEqual = (a, b) => JSON.stringify([...new Set(a)].sort()) === JSON.stringify([...new Set(b)].sort())
+console.log(isEqual([1, 2, 3, 4, 5], [1, 2, 3, 5, 4]))
+console.log(isEqual([1, 2, 3, 4, 5], [1, 2, 3, '5', 4]))
+
+> true
+> false
+```
+
+5. Compare two arrays（比较两个数组）
+
+```js
+const isEqual = (a, b) => JSON.stringify(a) === JSON.stringify(b)
+
+console.log(isEqual([1, 2, 3], [1, 2, 3]))
+console.log(isEqual([1, 2, 3], [1, 2]))
+
+> true
+> false
+```
+
+6. Convert an array of objects to a single object（将对象数组转换为单个对象）
+
+```js
+// vreduce() 方法接收一个函数作为累加器，数组中每个值（从左到右）开始缩减，最终计算为一个值
+
+const toObject = (arr, key) => arr.reduce((a, b) => ({...a, [b[key]]: b}), {})
+
+console.log(toObject(
+    [
+        {id: '1', name: 'Alpha', gender: 'Male'},
+        {id: '2', name: 'Bravo', gender: 'Male'}
+    ],
+    'id'
+))
+
+> {"1":{"id":"1","name":"Alpha","gender":"Male"},"2":{"id":"2","name":"Bravo","gender":"Male"}}
+```
+
+7. Convert an array of strings to numbers（将字符串数组转换为数字数组）
+
+```js
+// map() 方法创建一个新数组，这个新数组由原数组中的每个元素都调用一次提供的函数后的返回值组成
+
+const toNumbers = (arr) => arr.map(Number)
+
+// Or
+
+const toNumbers = (arr) => arr.map((x) => +x)
+
+console.log(toNumbers(['1', '2', '3']))
+
+> [1,2,3]
+```
+
+8. Count by the properties of an array of objects（按对象数组的属性计数）
 
